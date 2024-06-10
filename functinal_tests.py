@@ -9,7 +9,6 @@ class NewVisitorTests(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Chrome()
-        self.browser.implicitly_wait(3)
     
     def tearDown(self):
         self.browser.quit()
@@ -41,11 +40,8 @@ class NewVisitorTests(unittest.TestCase):
         time.sleep(1)
 
         table = self.browser.find_element(By.ID, 'id_list_table')
-        rows = table.find_element(By.TAG_NAME, 'tr')
-        self.assertIn('1: Buy flowers', [rows.text for row in rows])
-
-        input("Press Enter to close the browser and finish the test...")
-
+        rows = table.find_elements(By.TAG_NAME, 'tr')
+        self.assertIn('1: Buy flowers', [row.text for row in rows])
 
         #页面中又显示了一个文本输入框，可以输入其他待办事项
         #他输入了“Send a gift to girlfriend”
